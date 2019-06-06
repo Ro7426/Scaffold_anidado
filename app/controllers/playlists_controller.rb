@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /playlists
   # GET /playlists.json
@@ -70,5 +71,9 @@ class PlaylistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
       params.require(:playlist).permit(:name, :user_id)
+    end
+
+    def set_user
+      @user_array = User.all.map{|x| [x.name, x.id]}
     end
 end
